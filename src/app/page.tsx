@@ -1,4 +1,7 @@
+import { ReactElement } from "react";
 import Profile from "./components/profile";
+import AdminPanel from "./contents/admin_panel";
+import LoginForm from "./contents/login_form";
 
 function MyButton({ title }: { title: string }) {
   return (
@@ -20,21 +23,15 @@ function AboutPage() {
     </>
   );
 }
+const isLoggedIn: boolean = false;
+let content: ReactElement;
 
-const user = {
-  name: "Hedy Lamarr",
-  imageUrl: "https://i.imgur.com/yXOvdOSs.jpg",
-  imageSize: 90,
-};
+if (isLoggedIn) {
+  content = <AdminPanel />;
+} else {
+  content = <LoginForm />;
+}
 
 export default function MyApp() {
-  return (
-    <main className="flex justify-center p-24">
-      <div>
-        <MyButton title={"Click here"} />
-        <AboutPage />
-        <Profile />
-      </div>
-    </main>
-  );
+  return <main className="flex justify-center py-24">{content}</main>;
 }
